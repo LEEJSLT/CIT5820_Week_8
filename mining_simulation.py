@@ -28,8 +28,8 @@ def Simulate(alpha,gamma,N, seed):
                 #The honest miners found a block.
                 #The round is finished : the honest miners found 1 block
                 # and the selfish miners found 0 block.
-                ChainLength+=1
-                state=0
+                state = 0
+                ChainLength += 1
 
         elif state==1:
             #The selfish pool has 1 hidden block.
@@ -37,8 +37,9 @@ def Simulate(alpha,gamma,N, seed):
                 #The selfish miners found a new block.
                 #Write a piece of code to change the required variables.
                 #You might need to define new variable to keep track of the number of hidden blocks.
-                HiddenBlockLength = 2
                 state = 2
+                HiddenBlockLength = 2
+                
             else:
                 #Write a piece of code to change the required variables.
                 state = -1
@@ -48,36 +49,36 @@ def Simulate(alpha,gamma,N, seed):
             #There are three situations! 
             #Write a piece of code to change the required variables in each one.
             if r<=alpha:
-                ChainLength += 2
-                SelfishRevenue += 2
                 state = 0
+                SelfishRevenue += 2
+                ChainLength += 2
 
             elif r<=alpha+(1-alpha)*gamma:
-                ChainLength += 2
-                SelfishRevenue += 1
                 state = 0
+                ChainLength += 2
+                SelfishRevenue += 1     
 
             else:
-                ChainLength += 2
                 state = 0
+                ChainLength += 2  
 
         elif state==2:
             #The selfish pool has 2 hidden block.
             if r<=alpha:
-                HiddenBlockLength += 1
                 state = 3
+                HiddenBlockLength += 1
 
             else:
                 #The honest miners found a block.
-                ChainLength += HiddenBlockLength
-                SelfishRevenue += HiddenBlockLength
                 state = 0
+                SelfishRevenue += HiddenBlockLength
+                ChainLength += HiddenBlockLength
 
         elif state>2:
             if r<=alpha:
                 #The selfish miners found a new block
-                HiddenBlockLength += 1
                 state += 1
+                HiddenBlockLength += 1
 
             else:
                 #The honest miners found a block
